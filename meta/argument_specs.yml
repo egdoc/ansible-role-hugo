@@ -1,0 +1,20 @@
+---
+argument_specs:
+  main:
+    options:
+      hugo_version:
+        type: str
+        default: 0.155.2
+      hugo_arch:
+        type: str
+        choices:
+          - arm
+          - arm64
+          - amd64
+        default: amd64
+      hugo_install_dir:
+        type: str
+        default: /usr/local/bin
+      hugo_repo_url:
+        type: str
+        default: https://github.com/gohugoio/hugo

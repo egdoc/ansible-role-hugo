@@ -1,0 +1,14 @@
+---
+- name: Ensure HUGO installation directory exists
+  ansible.builtin.file:
+    path: '{{ hugo_install_dir }}'
+    state: directory
+    mode: '0755'
+
+- name: Ensure HUGO binary is installed
+  ansible.builtin.unarchive:
+    src: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/hugo_{{ hugo_version }}_linux-{{ hugo_arch }}.tar.gz'
+    dest: '{{ hugo_install_dir }}'
+    remote_src: true
+    include: hugo
+    mode: '0755'

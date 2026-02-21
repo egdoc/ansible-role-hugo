@@ -1,0 +1,5 @@
+---
+hugo_version: 0.155.2
+hugo_platform: linux
+hugo_arch: amd64
+hugo_install_dir: /usr/local/bin
