@@ -5,9 +5,15 @@
     state: directory
     mode: '0755'
 
+- name: Download HUGO
+  ansible.builtin.get_url:
+    url: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/{{ hugo_tarball }}'
+    dest: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
+    checksum: sha256:{{ hugo_checksum }}
+
 - name: Ensure HUGO binary is installed
   ansible.builtin.unarchive:
-    src: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/hugo_{{ hugo_version }}_linux-{{ hugo_arch }}.tar.gz'
+    src: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
     dest: '{{ hugo_install_dir }}'
     remote_src: true
     include: hugo

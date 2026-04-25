@@ -12,6 +12,15 @@ argument_specs:
           - arm64
           - amd64
         default: amd64
+      hugo_checksum:
+        type: str
+        default: a680e2c6dd0e2244c237c85b549cb8697778cd068c84af1f7b0d9422827a554c
+      hugo_tarball:
+        type: str
+        default: hugo_{{ hugo_version }}_linux-{{ hugo_arch }}.tar.gz
+      hugo_download_dir:
+        type: str
+        default: /tmp
       hugo_install_dir:
         type: str
         default: /usr/local/bin
