@@ -1,0 +1,13 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Check HUGO version
+      ansible.builtin.command:
+        cmd: /usr/local/bin/hugo version
+      changed_when: false
+      register: hugo_version
+
+    - name: Assert HUGO version is 0.155.2
+      ansible.builtin.assert:
+        that: '"0.155.2" in hugo_version.stdout'
