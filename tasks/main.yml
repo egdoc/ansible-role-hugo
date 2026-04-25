@@ -10,6 +10,7 @@
     url: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/{{ hugo_tarball }}'
     dest: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
     checksum: sha256:{{ hugo_checksum }}
+    mode: '0644'
 
 - name: Ensure HUGO binary is installed
   ansible.builtin.unarchive:
