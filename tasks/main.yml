@@ -1,10 +1,4 @@
 ---
-- name: Ensure HUGO installation directory exists
-  ansible.builtin.file:
-    path: '{{ hugo_install_dir }}'
-    state: directory
-    mode: '0755'
-
 - name: Download HUGO
   ansible.builtin.get_url:
     url: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/{{ hugo_tarball }}'
