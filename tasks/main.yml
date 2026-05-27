@@ -1,15 +1,31 @@
 ---
-- name: Download HUGO
-  ansible.builtin.get_url:
-    url: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/{{ hugo_tarball }}'
-    dest: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
-    checksum: sha256:{{ hugo_checksum }}
-    mode: '0644'
+- name: Check HUGO version
+  ansible.builtin.command:
+    cmd: hugo version
+    chdir: '{{ hugo_install_dir }}'
+  ignore_errors: true
+  changed_when: false
+  register: check_hugo
 
-- name: Ensure HUGO binary is installed
-  ansible.builtin.unarchive:
-    src: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
-    dest: '{{ hugo_install_dir }}'
-    remote_src: true
-    include: hugo
-    mode: '0755'
+- name: Download and install HUGO
+  when: check_hugo is failed or hugo_version not in check_hugo.stdout
+  block:
+    - name: Download HUGO
+      ansible.builtin.get_url:
+        url: '{{ hugo_repo_url }}/releases/download/v{{ hugo_version }}/{{ hugo_tarball }}'
+        dest: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
+        checksum: sha256:{{ hugo_checksum }}
+        mode: '0644'
+
+    - name: Ensure HUGO binary is installed
+      ansible.builtin.unarchive:
+        src: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
+        dest: '{{ hugo_install_dir }}'
+        remote_src: true
+        include: hugo
+        mode: '0755'
+  always:
+    - name: Ensure HUGO tarball is absent
+      ansible.builtin.file:
+        path: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
+        state: absent
