@@ -24,6 +24,9 @@ argument_specs:
       hugo_install_dir:
         type: str
         default: /usr/local/bin
+      hugo_discard_tarball:
+        type: bool
+        default: false
       hugo_repo_url:
         type: str
         default: https://github.com/gohugoio/hugo

@@ -29,3 +29,4 @@
       ansible.builtin.file:
         path: '{{ hugo_download_dir }}/{{ hugo_tarball }}'
         state: absent
+      when: hugo_discard_tarball | bool

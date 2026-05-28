@@ -3,3 +3,4 @@
   hosts: all
   roles:
     - role: egdoc.hugo
+      hugo_discard_tarball: true

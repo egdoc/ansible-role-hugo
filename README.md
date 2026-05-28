@@ -41,6 +41,12 @@ hugo_install_dir: /usr/local/bin
 The directory where to install HUGO
 
 ```yaml
+hugo_discard_tarball: false
+```
+Whether to remove the downloaded HUGO tarball after installation is complete.
+
+
+```yaml
 hugo_repo_url: https://github.com/gohugoio/hugo
 ```
 URL of HUGO GitHub repository.
